@@ -8,8 +8,11 @@ namespace MarvelCharacters
 {
     public class Thumbnail
     {
+
         public string path { get; set; }
         public string extension { get; set; }
+        public string small { get; set; }
+        public string large { get; set; }
     }
 
     public class ItemsInComic

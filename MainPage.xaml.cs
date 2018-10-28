@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,14 +23,24 @@ namespace MarvelCharacters
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public ObservableCollection<Character> marvelheroes { get; set; }
+
         public MainPage()
         {
             this.InitializeComponent();
+            marvelheroes = new ObservableCollection<Character>(); // creating new instance
         }
 
-        private void Button(Object sender, RoutedEventArgs r)
+        private async void Page_Loaded(Object sender, RoutedEventArgs r)// this thing will load the page with the characters
         {
-            var data = DesignPattern.GetCharacters();
+            MyProgressRing.IsActive = true;
+            MyProgressRing.Visibility = Visibility.Visible;
+
+            await DesignPattern.FindMarvelCharactersAsync(marvelheroes);
+
+            MyProgressRing.IsActive = false;
+            MyProgressRing.Visibility = Visibility.Collapsed;
         }
+
     }
 }

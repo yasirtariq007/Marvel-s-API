@@ -5,9 +5,41 @@
     xmlns:local="using:MarvelCharacters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:MarvelCharacters"
+    Loaded="Page_Loaded"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Button Click= "Button" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ListView Name="MasterListView" ItemsSource="{x:Bind marvelheroes}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="data:Character">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{x:Bind thumbnail.small}" />
+                        <TextBlock Text="{x:Bind name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+        <Grid Name="DetailGrid">
+            
+        </Grid>
+
+        <TextBlock Text="Attribution" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+        <ProgressRing Name="MyProgressRing" Width="100" Height="100" Foreground="Gray" 
+                      Grid.ColumnSpan="2" Grid.RowSpan="3" VerticalAlignment="Center" 
+                      HorizontalAlignment="Center" />
     </Grid>
 </Page>

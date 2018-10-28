@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -16,9 +17,27 @@ namespace MarvelCharacters
     {
         private const string PrivateKey = "111e7db13ff145edd81a48c3352809d92fe760e5";
         private const string PublicKey = "6db41c01b00655c94177492af2cf5c28";
+        private const string NoImagePath = "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available";
 
-        public static async Task<CharacterDataWrapper> GetCharacters() // getting all the characters from json and
-                                          // deserialize it (making objects) into our classes 
+        public static async Task FindMarvelCharactersAsync(ObservableCollection<Character> marvelheores)
+        {
+            var characterDataWrapper = await GetCharacterDataWrapperAsync();// wait to get the character
+            var heroes = characterDataWrapper.data.results;// give the results of the characters
+
+            foreach (var person in heroes)
+            {
+
+                if (person.thumbnail != null && person.thumbnail.path != "" && person.thumbnail.path != NoImagePath)//filtering those characters whose images are not found
+                {
+                    person.thumbnail.small = String.Format("{0}/standard_small.{1}", person.thumbnail.path, person.thumbnail.extension);
+                    person.thumbnail.large = String.Format("{0}/portrait_xlarge.{1}", person.thumbnail.path, person.thumbnail.extension);
+                    marvelheores.Add(person);// adding all characters in marvelheroes
+                }
+            }
+        }
+        private static async Task<CharacterDataWrapper> GetCharacterDataWrapperAsync() // getting all the characters from json and
+                                          // deserialize it (making objects) into our classes its also an awaitable task thats why 
+                                          // i use async
         {
             Random random = new Random();// create the object for the offset
             var offset = random.Next(1500);

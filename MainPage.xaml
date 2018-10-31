@@ -23,23 +23,27 @@
         <ListView Name="MasterListView" ItemsSource="{x:Bind marvelheroes}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:Character">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="{x:Bind thumbnail.small}" />
-                        <TextBlock Text="{x:Bind name}" />
+                    <StackPanel Orientation="Horizontal" Margin="10,5,0,5">
+                        <Ellipse Width="45" Height="45">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{x:Bind thumbnail.small}" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock Text="{x:Bind name}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="18" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
 
-        <Grid Name="DetailGrid">
-            
+        <Grid Name="DetailGrid" Grid.Column="1" Grid.Row="0">
+
         </Grid>
 
-        <TextBlock Text="Attribution" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <TextBlock Text="Data provided by Marvel. © 2015 Marvel" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" 
+                   Grid.Row="2" />
 
-        <ProgressRing Name="MyProgressRing" Width="100" Height="100" Foreground="Gray" 
-                      Grid.ColumnSpan="2" Grid.RowSpan="3" VerticalAlignment="Center" 
+        <ProgressRing Name="MyProgressRing" Width="100" Height="100" Foreground="Gray" Grid.ColumnSpan="2" Grid.RowSpan="3" VerticalAlignment="Center"
                       HorizontalAlignment="Center" />
+
     </Grid>
 </Page>

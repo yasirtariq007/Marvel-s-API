@@ -4,20 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Thanks to jsontoC# converter that takes the json format and parse the whole thing and figure out what classes to make in C#
+
 namespace MarvelCharacters
 {
     public class Thumbnail
     {
-
         public string path { get; set; }
         public string extension { get; set; }
         public string small { get; set; }
         public string large { get; set; }
+
     }
 
     public class ItemsInComic
     {
-        public string resourceURI { get; set; }
+        public object resourceURI { get; set; }
         public string name { get; set; }
     }
 
@@ -78,12 +80,12 @@ namespace MarvelCharacters
         public string url { get; set; }
     }
 
-    public class Character // using the same objects as Marvel's API using
+    public class Character
     {
         public int id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
-        public DateTime modified { get; set; }
+        public string modified { get; set; }
         public Thumbnail thumbnail { get; set; }
         public string resourceURI { get; set; }
         public Comics comics { get; set; }
@@ -93,7 +95,7 @@ namespace MarvelCharacters
         public List<Url> urls { get; set; }
     }
 
-    public class CharacterDataContainer // using the same objects as Marvel's API using
+    public class CharacterDataContainer
     {
         public int offset { get; set; }
         public int limit { get; set; }
@@ -102,7 +104,7 @@ namespace MarvelCharacters
         public List<Character> results { get; set; }
     }
 
-    public class CharacterDataWrapper // using the same objects as Marvel's API using
+    public class CharacterDataWrapper
     {
         public int code { get; set; }
         public string status { get; set; }

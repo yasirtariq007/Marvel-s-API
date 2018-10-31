@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MarvelCharacters;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -28,10 +29,11 @@ namespace MarvelCharacters
         public MainPage()
         {
             this.InitializeComponent();
-            marvelheroes = new ObservableCollection<Character>(); // creating new instance
+
+            marvelheroes = new ObservableCollection<Character>();// creating new instance
         }
 
-        private async void Page_Loaded(Object sender, RoutedEventArgs r)// this thing will load the page with the characters
+        private async void Page_Loaded(object sender, RoutedEventArgs r)// this method will load the page with the characters
         {
             MyProgressRing.IsActive = true;
             MyProgressRing.Visibility = Visibility.Visible;
@@ -41,6 +43,5 @@ namespace MarvelCharacters
             MyProgressRing.IsActive = false;
             MyProgressRing.Visibility = Visibility.Collapsed;
         }
-
     }
 }
